@@ -1,0 +1,94 @@
+package finalproject_javafx;
+
+/**
+ *
+ * @author 
+ */
+
+import static javafx.application.Application.launch;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Control;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
+
+public class HandleEvent extends Application {
+	int window_width = 300;
+	int window_height = 250;
+	
+	static Pane loginScreen = new Pane();
+	static Pane memberScreen = new Pane();
+	static Pane managerScreen = new Pane();
+	
+	static int programState = 0;
+	
+	@Override // Override the start method in the Application class
+	public void start(Stage primaryStage) {
+		setupLoginScreen();
+		
+		
+		Scene scene = new Scene(loginScreen, window_width, window_height);
+		primaryStage.setTitle("Hello World!");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+	
+	public static void setupLoginScreen(){
+		TextField usernameField = new TextField();
+		setProperties(usernameField, 10, 10, 100);
+		TextField passwordField = new TextField();
+		setProperties(passwordField, 10, 50, 100);
+		Button loginButton = new Button();
+		setProperties(loginButton, 10, 90, 100);
+		loginButton.setText("Login");
+		loginButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				System.out.println("Username = " + usernameField.getText());
+				System.out.println("Password = " + passwordField.getText());
+				programState = 2;
+		}});
+		
+		//loginButton.setOnAction(new LoginHandler(usernameField, passwordField));
+		loginScreen.getChildren().addAll(loginButton, usernameField, passwordField);
+	}
+	
+	public static void setProperties(Control c, int positionX, int positionY, int width){
+		c.setMaxHeight(30);
+		c.setMinHeight(30);
+		c.setMaxWidth(width);
+		c.setMinWidth(width);
+		c.setLayoutX(positionX);
+		c.setLayoutY(positionY);
+	}
+
+	//public static void main(String[] args) {
+	//	launch(args);
+	//}
+}
+
+class LoginHandler implements EventHandler<ActionEvent> {
+	final private TextField usernameField;
+	final private TextField passwordField;
+	public LoginHandler(TextField _usernameField, TextField _passwordField){
+		usernameField = _usernameField;
+		passwordField = _passwordField;
+	}
+	@Override
+	public void handle(ActionEvent e) {
+		System.out.println("Username = " + usernameField.getText());
+		System.out.println("Password = " + passwordField.getText());
+		HandleEvent.programState = 2;
+	}
+}
