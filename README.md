@@ -1,4 +1,4 @@
-# BankApp
+# BankApp (Built using Java)
 A simple GUI application for a bank account. 
 To create a customer account, the user must login as an admin (user & pasword = admin) and create an account with a username and a password (Accounts start with an initial Balance of $100). 
 The customer's credentials will be kept in same directory as the application. 
